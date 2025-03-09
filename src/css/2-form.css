@@ -17,14 +17,14 @@ label {
     letter-spacing: 0.04em;
 }
 
-input {
+/* input {
   border: 1px solid #808080;
   border-radius: 4px;
   width: 360px;
   height: 40px;
   margin-top: 8px;
   margin-bottom: 8px;
-}
+} */
 
 textarea {
     border: 1px solid #808080;
@@ -39,7 +39,7 @@ input:hover, textarea:hover {
   border: 1px solid #000;
 }
 
-button {
+/* button {
     border-radius: 8px;
     padding: 8px 16px;
     width: 95px;
@@ -56,4 +56,4 @@ button {
 
 button:hover {
   background-color: #6c8cff;
-}
+} */
