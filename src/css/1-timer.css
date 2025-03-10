@@ -25,6 +25,19 @@ input {
     width: 272px;
     height: 40px;
     padding: 8px 16px;
+    border: 1px solid #808080;
+}
+input:disabled {
+    border: 1px solid #808080;
+    background-color: #fafafa;
+    pointer-events: none;
+}
+input:active {
+    border: 1px solid #4e75ff;
+    color: #000;
+}
+input:hover {
+    border: 1px solid #000;
 }
 
 button {
@@ -43,6 +56,8 @@ button {
 button:disabled {
     background-color: #cfcfcf;
     color: #989898;
+    pointer-events: none;
+    /* cursor: default; */
 }
 button:hover {
     background-color: #6c8cff;

@@ -5,6 +5,7 @@ import "izitoast/dist/css/iziToast.min.css";
 
 
 const btn = document.querySelector("button");
+const inputEl = document.querySelector("input");
 const daysEl = document.querySelector("[data-days]");
 const hoursEl = document.querySelector("[data-hours]");
 const minutesEl = document.querySelector("[data-minutes]");
@@ -12,6 +13,7 @@ const secondsEl = document.querySelector("[data-seconds]");
 
 btn.addEventListener("click", countTime);
 btn.disabled = true;
+
 
 let userSelectedDate;
 let intervalId;
@@ -25,13 +27,17 @@ const options = {
         userSelectedDate = selectedDates[0];
         if (selectedDates[0] <= new Date()) {
             iziToast.show({
-                message: 'Please choose a date in the future'
+                message: 'Please choose a date in the future',
+                iconUrl: '../img/sprite.svg#icon-cancel-circle', //Не виходить додати та закрасити іконку(
+                iconColor: 'black',
+                position: 'topRight',
+                color: 'red',
             });
-            // alert("Please choose a date in the future");
             btn.disabled = true;
         }
         else {
             btn.disabled = false;
+            inputEl.disabled = true;
         }
         
     console.log(selectedDates[0]);
@@ -40,6 +46,7 @@ const options = {
 
 function countTime() {
     clearInterval(intervalId);
+    btn.disabled = true;
 
     intervalId = setInterval(() => {
         const startTime = userSelectedDate;
@@ -48,6 +55,7 @@ function countTime() {
         
         if (time <= 0) {
             clearInterval(intervalId);
+            inputEl.disabled = false;
             return;
         }
 
@@ -78,8 +86,12 @@ function convertMs(ms) {
 }
 
 function updateTimerFace({days, hours, minutes, seconds}) {
-    daysEl.textContent = days.toString().padStart(2, "0");
-    hoursEl.textContent = hours.toString().padStart(2, "0");
-    minutesEl.textContent = minutes.toString().padStart(2, "0");
-    secondsEl.textContent = seconds.toString().padStart(2, "0");
+    daysEl.textContent = addLeadingZero(days);
+    hoursEl.textContent = addLeadingZero(hours); 
+    minutesEl.textContent = addLeadingZero(minutes);
+    secondsEl.textContent = addLeadingZero(seconds);
+}
+
+function addLeadingZero(value) {
+    return value.toString().padStart(2, "0");
 }
