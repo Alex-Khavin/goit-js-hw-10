@@ -28,16 +28,15 @@ const options = {
         if (selectedDates[0] <= new Date()) {
             iziToast.show({
                 message: 'Please choose a date in the future',
-                iconUrl: '../img/sprite.svg#icon-cancel-circle', //Не виходить додати та закрасити іконку(
-                iconColor: 'black',
+                messageColor: 'white',
+                iconUrl: '../img/cancel-circle.svg',
                 position: 'topRight',
-                color: 'red',
+                color: '#ef4040',
             });
             btn.disabled = true;
         }
         else {
             btn.disabled = false;
-            inputEl.disabled = true;
         }
         
     console.log(selectedDates[0]);
@@ -47,6 +46,7 @@ const options = {
 function countTime() {
     clearInterval(intervalId);
     btn.disabled = true;
+    inputEl.disabled = true;
 
     intervalId = setInterval(() => {
         const startTime = userSelectedDate;

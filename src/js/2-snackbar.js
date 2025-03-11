@@ -1,7 +1,6 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-let delay;
 let state = "fulfilled";
 
 const formSubmit = document.querySelector(".form");
@@ -10,25 +9,23 @@ const radioEl = document.querySelectorAll("[name='state']");
 
 formSubmit.addEventListener("submit", event => {
   event.preventDefault();
+
+  const delay = Number(inputEl.value);
   
   createPromise(delay, state)
-    .then(message => iziToast.show({
-      message: `${message}`,
+    .then(() => iziToast.show({
+      message: `✅ Fulfilled promise in ${delay} ms`,
+      messageColor: 'white',
       position: 'topRight',
-      color: 'green',
+      color: '#59a10d',
     }))
-    .catch(error => iziToast.show({
-      message: `${error}`,
+    .catch(() => iziToast.show({
+      message: `❌ Rejected promise in ${delay} ms`,
+      messageColor: 'white',
       position: 'topRight',
-      color: 'red',
+      color: '#ef4040',
     }));
 });
-
-inputEl.addEventListener("input", handlerInput);
-
-function handlerInput(event) {
-  delay = Number(event.target.value);
-};
 
 radioEl.forEach(radio => {
   radio.addEventListener("click", event => {
@@ -42,10 +39,11 @@ function createPromise(delay, state) {
 
     setTimeout(() => {
       if (state === "fulfilled") {
-        resolve(`✅ Fulfilled promise in ${delay} ms`);
+        resolve();
       }
-      reject(`❌ Rejected promise in ${delay} ms`);
-      
+      else {
+        reject();
+        }
     }, delay)
   })
 }
